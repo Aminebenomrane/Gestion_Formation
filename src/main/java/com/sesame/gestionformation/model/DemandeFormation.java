@@ -22,7 +22,7 @@ public class DemandeFormation {
     @JoinColumn(name = "idformation")
     private Formation formation;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "idcollaborateur")
     private Collaborateur collaborateur;
     @Column(name = "heure_formation")
