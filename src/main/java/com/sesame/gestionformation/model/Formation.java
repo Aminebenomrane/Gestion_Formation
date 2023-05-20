@@ -23,7 +23,7 @@ public class Formation {
     String titre;
     String description;
     String niveau;
-    String etat;
+
     String specialite;
     @CreatedDate
     @Column(name = "creationDate")
