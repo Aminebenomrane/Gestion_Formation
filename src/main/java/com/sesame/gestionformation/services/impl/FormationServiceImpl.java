@@ -61,7 +61,7 @@ public class FormationServiceImpl implements FormationService {
 
         existingFormation.setSpecialite(formation.getSpecialite());
         existingFormation.setDate_formation(formation.getDate_formation());
-        existingFormation.setCreationDate(formation.getCreationDate());
+
         existingFormation.setCout(formation.getCout());
         existingFormation.setHeure_formation(formation.getHeure_formation());
         existingFormation.setQuota_max(formation.getQuota_max());
