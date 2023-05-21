@@ -11,15 +11,15 @@ import static com.sesame.gestionformation.utils.Constants.Api_Root;
 
 public interface Comptenceapi {
 
-
     @PostMapping(value = Api_Root + "/competence/create")
+
     Competence save(@RequestBody Competence competence);
     @GetMapping(value = Api_Root + "/competence/{idcompetence}")
-    Optional<Competence> findById(@PathVariable("idcompetence") Long id);
+    Optional<Competence> findById(@PathVariable("idcompetence")Long id);
     @GetMapping(value = Api_Root + "/competence/All")
     List<Competence> findAll();
     @DeleteMapping(value = Api_Root + "/competence/delete/{idcompetence}")
-    void delete(Long id);
+    void delete(@PathVariable("idcompetence")Long id);
 
 
 }

@@ -1,5 +1,6 @@
 package com.sesame.gestionformation.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,9 +21,13 @@ public class Competence {
     String lien;
     double score;
     @ManyToOne
+
     @JoinColumn(name = "idformation")
     Formation formation;
-    @ManyToMany(mappedBy = "competences", cascade = CascadeType.ALL)
-    private List<Collaborateur> collaborateurs;
+
+    @JsonIgnore
+    @ManyToMany
+    @JoinColumn(name = "idcollaborateur")
+    List<Collaborateur> collaborateurs;
 
 }

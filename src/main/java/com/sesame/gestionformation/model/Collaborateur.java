@@ -25,12 +25,12 @@ public class Collaborateur extends Utilisateur {
     @OneToMany(mappedBy = "collaborateur" )
     List<DemandeFormation>demandeFormations;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany
     @JoinTable(
-            name = "competence_collaborateur",
-            joinColumns = @JoinColumn(name = "idcollaborateur"),
-            inverseJoinColumns = @JoinColumn(name = "idcompetence")
+            name = "collaborateur_competence",
+            joinColumns = @JoinColumn(name = "collaborateur_id"),
+            inverseJoinColumns = @JoinColumn(name = "competence_id")
     )
-    private List<Competence> competences;
+    private  List<Competence>competences;
 
 }
