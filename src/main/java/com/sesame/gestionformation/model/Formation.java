@@ -25,9 +25,7 @@ public class Formation {
     String niveau;
 
     String specialite;
-    @CreatedDate
-    @Column(name = "creationDate")
-    private LocalDate creationDate;
+
     @Temporal(TemporalType.DATE)
     Date date_formation;
 
