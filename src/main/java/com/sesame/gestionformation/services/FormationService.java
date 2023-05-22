@@ -15,7 +15,7 @@ public interface FormationService {
     Optional<Formation> findById(Long id);
     List<Formation> findAll();
     void delete(Long id);
-    ResponseEntity<Formation> updateFormation(@PathVariable Long id,
+    Formation updateFormation(@PathVariable Long id,
                                                   @RequestBody Formation formation);
 }
 

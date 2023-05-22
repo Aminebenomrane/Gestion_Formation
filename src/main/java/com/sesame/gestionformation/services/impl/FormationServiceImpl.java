@@ -43,12 +43,9 @@ public class FormationServiceImpl implements FormationService {
     }
 
     @Override
-    public ResponseEntity<Formation> updateFormation(Long id, Formation formation) {
-        Optional<Formation> optionalFormation = formationRepository.findById(id);
+    public Formation updateFormation(Long id, Formation formation) {
+        Optional<Formation> optionalFormation = Optional.ofNullable(formationRepository.findById(id).orElse(null));
 
-        if (!optionalFormation.isPresent()) {
-            return ResponseEntity.notFound().build();
-        }
 
         Formation existingFormation = optionalFormation.get();
 
@@ -66,11 +63,11 @@ public class FormationServiceImpl implements FormationService {
         existingFormation.setHeure_formation(formation.getHeure_formation());
         existingFormation.setQuota_max(formation.getQuota_max());
 
-        Formation updateFormation = formationRepository.save(existingFormation);
 
 
 
-        return ResponseEntity.ok(updateFormation);
+
+        return  formationRepository.save(existingFormation);
     }
 
 

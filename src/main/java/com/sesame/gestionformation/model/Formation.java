@@ -22,9 +22,10 @@ public class Formation {
     Long idformation;
     String titre;
     String description;
-    String niveau;
-
-    String specialite;
+    @Enumerated(EnumType.STRING)
+    Niveau niveau;
+    @Enumerated(EnumType.STRING)
+    Specialitess specialite;
 
     @Temporal(TemporalType.DATE)
     Date date_formation;

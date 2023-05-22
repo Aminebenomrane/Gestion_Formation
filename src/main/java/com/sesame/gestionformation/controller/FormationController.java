@@ -33,7 +33,7 @@ formationService.delete(id);
     }
 
     @Override
-    public ResponseEntity<Formation> updateFormation(Long id, Formation formation) {
+    public Formation updateFormation(Long id, Formation formation) {
         return formationService.updateFormation(id,formation);
     }
 }

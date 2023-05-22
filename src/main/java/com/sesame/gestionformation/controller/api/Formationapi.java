@@ -16,7 +16,7 @@ public interface Formationapi {
     List<Formation> findAll();
     @DeleteMapping(value =Api_Root+ "/formations/{idformation}")
     void delete(@PathVariable("idformation") Long id);
-    @PutMapping(value = Api_Root+"/formations/{id}")
-    ResponseEntity<Formation> updateFormation(@PathVariable Long id,
+    @PutMapping(value = Api_Root+"/fo/{id}")
+   Formation updateFormation(@PathVariable Long id,
                                               @RequestBody Formation formation);
 }
