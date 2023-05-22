@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface AdministrateurService {
     Administrateur save(Administrateur admin);
-    Optional<Administrateur> findById(Long id);
+    Optional<Administrateur> findById(Integer id);
     List<Administrateur> findAll();
-    void delete(Long id);
+    void delete(Integer id);
 }

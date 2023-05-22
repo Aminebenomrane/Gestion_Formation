@@ -12,6 +12,8 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -29,6 +31,17 @@ public class AuthenticationController {
         this.repository = repository;
         this.service = service;
     }
+
+    @GetMapping("/current-user")
+
+    public ResponseEntity<Utilisateur> getCurrentUser() {
+        Utilisateur user = service.getCurrentUser();
+        if (user == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(user);
+    }
+
 
     @PostMapping("/register")
     public ResponseEntity<AuthenticationResponse> register(

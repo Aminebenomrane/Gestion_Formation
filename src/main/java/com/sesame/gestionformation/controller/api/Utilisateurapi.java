@@ -28,4 +28,6 @@ public interface Utilisateurapi {
     List<UtilisateurDto> findAll();
     @DeleteMapping(value = Api_Root + "/utilisateurs/delete/{iduser}")
     void delete(@PathVariable("iduser") Integer id);
+
+
 }

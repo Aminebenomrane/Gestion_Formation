@@ -26,7 +26,7 @@ AdministrateurRepository administrateurRepository;
     }
 
     @Override
-    public Optional<Administrateur> findById(Long id) {
+    public Optional<Administrateur> findById(Integer id) {
         if (id==null){
             log.error("Id de administrateur est nulle");
         }
@@ -41,7 +41,7 @@ AdministrateurRepository administrateurRepository;
     }
 
     @Override
-    public void delete(Long id) {
+    public void delete(Integer id) {
 administrateurRepository.deleteById(id);
     }
 }
