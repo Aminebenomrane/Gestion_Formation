@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface DemandeFormationService {
-     DemandeFormation createDemandeFormation(Integer collaborateurId, Long formationId);
+     DemandeFormation createDemandeFormation(DemandeFormation demandeFormation);
     DemandeFormation validerDemandeFormation(Long idDemandeFormation);
     DemandeFormation annulerDemandeFormation(Long idDemandeFormation);
     Optional<DemandeFormation> findById(Long id);

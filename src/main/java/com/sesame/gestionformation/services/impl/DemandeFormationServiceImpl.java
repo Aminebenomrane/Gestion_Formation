@@ -32,15 +32,19 @@ public class DemandeFormationServiceImpl implements DemandeFormationService {
         this.demandeFormationRepository = demandeFormationRepository;
     this.collaborateurRepository = collaborateurRepository;
 }
-    public DemandeFormation createDemandeFormation(Integer collaborateurId, Long formationId) {
-        Formation formation = formationRepository.findById(formationId)
-                .orElseThrow(() -> new InvalidEntityException("Formation non trouvée"));
-        Collaborateur collaborateur = collaborateurRepository.findById(collaborateurId)
-                .orElseThrow(() -> new InvalidEntityException("Collaborateur non trouvé"));
+    public DemandeFormation createDemandeFormation(DemandeFormation demandeFormation) {
+        if (demandeFormation.getIddemande() != null) {
+            throw new InvalidEntityException("ID de demande de formation déjà défini");
+        }
+        Formation formation = demandeFormation.getFormation();
+        Collaborateur collaborateur = demandeFormation.getCollaborateur();
 
         if (formation != null && collaborateur != null) {
-            if (formation.getQuota_max() > formation.getNbre_places()) {
-                DemandeFormation demandeFormation = new DemandeFormation();
+            Formation formationEnBase = formationRepository.findById(formation.getIdformation()).orElse(null);
+            Collaborateur collaborateur1=collaborateurRepository.findById(collaborateur.getId_user()).orElse(null
+            );
+            if (formationEnBase != null && (formationEnBase.getQuota_max()) > (formationEnBase.getNbre_places())&&collaborateur1!=null)  {
+
                 demandeFormation.setFormation(formation);
                 demandeFormation.setCollaborateur(collaborateur);
                 demandeFormation.setEtat(EtatDemande.En_cours);

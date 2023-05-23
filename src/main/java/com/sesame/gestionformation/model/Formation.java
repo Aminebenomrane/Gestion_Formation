@@ -41,7 +41,7 @@ public class Formation {
     double cout;
     int quota_max;
     int nbre_places;
-
+@JsonIgnore
     @ManyToMany(mappedBy = "formation",cascade = CascadeType.ALL)
     private List<PlanFormation>planFormations;
 

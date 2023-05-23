@@ -1,5 +1,6 @@
 package com.sesame.gestionformation.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,6 +23,7 @@ public class Collaborateur extends Utilisateur {
     private String niveau;
     @Column(name = "diplome")
     private String diplome;
+    @JsonIgnore
     @OneToMany(mappedBy = "collaborateur" )
     List<DemandeFormation>demandeFormations;
 
@@ -31,6 +33,7 @@ public class Collaborateur extends Utilisateur {
             joinColumns = @JoinColumn(name = "collaborateur_id"),
             inverseJoinColumns = @JoinColumn(name = "competence_id")
     )
+    @JsonIgnore
     private  List<Competence>competences;
 
 }

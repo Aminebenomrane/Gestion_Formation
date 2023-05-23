@@ -11,8 +11,8 @@ import static com.sesame.gestionformation.utils.Constants.Api_Root;
 
 public interface DemandeFormationapi {
 
-    @PostMapping(value = Api_Root + "/demandeformation")
-    DemandeFormation createDemandeFormation(@RequestParam("collaborateurId") Integer collaborateurId, @RequestParam("formationId")Long formationId);
+    @PostMapping(value = Api_Root + "/dmandeformation")
+    DemandeFormation createDemandeFormation(@RequestBody DemandeFormation demandeFormation);
     @PutMapping(value = Api_Root +"/valider/{idDemandeFormation}")
     DemandeFormation validerDemandeFormation(@PathVariable("idDemandeFormation")Long idDemandeFormation);
     @PutMapping(Api_Root +"/annuler/{idDemandeFormation}")
