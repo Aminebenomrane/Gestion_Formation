@@ -6,10 +6,11 @@ import java.util.List;
 import java.util.Optional;
 
 public interface DemandeFormationService {
-    DemandeFormation save(DemandeFormation demandeFormation);
+     DemandeFormation createDemandeFormation(Integer collaborateurId, Long formationId);
     DemandeFormation validerDemandeFormation(Long idDemandeFormation);
     DemandeFormation annulerDemandeFormation(Long idDemandeFormation);
     Optional<DemandeFormation> findById(Long id);
     List<DemandeFormation> findAll();
+
 
 }

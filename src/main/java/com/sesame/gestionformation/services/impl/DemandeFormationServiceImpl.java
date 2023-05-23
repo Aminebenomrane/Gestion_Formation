@@ -1,5 +1,6 @@
 package com.sesame.gestionformation.services.impl;
 
+import com.sesame.gestionformation.dao.CollaborateurRepository;
 import com.sesame.gestionformation.dao.DemandeFormationRepository;
 import com.sesame.gestionformation.dao.FormationRepository;
 import com.sesame.gestionformation.exception.InvalidEntityException;
@@ -23,29 +24,37 @@ public class DemandeFormationServiceImpl implements DemandeFormationService {
     private DemandeFormationRepository demandeFormationRepository;
     @Autowired
     private FormationRepository formationRepository;
-@Autowired
-    public DemandeFormationServiceImpl(DemandeFormationRepository demandeFormationRepository) {
-        this.demandeFormationRepository = demandeFormationRepository;
-    }
-    @Override
-    public DemandeFormation save(DemandeFormation demandeFormation) {
-        if (demandeFormation.getIddemande() != null) {
-            throw new InvalidEntityException("ID de demande de formation déjà défini");
-        }
+    @Autowired
+    private final CollaborateurRepository collaborateurRepository;
 
-        Formation formation = demandeFormation.getFormation();
-        if (formation != null && formation.getIdformation() != null) {
-            Formation formationEnBase = formationRepository.findById(formation.getIdformation()).orElse(null);
-            if (formationEnBase != null && (formationEnBase.getQuota_max()) > (formationEnBase.getNbre_places())) {
+@Autowired
+    public DemandeFormationServiceImpl(DemandeFormationRepository demandeFormationRepository, CollaborateurRepository collaborateurRepository) {
+        this.demandeFormationRepository = demandeFormationRepository;
+    this.collaborateurRepository = collaborateurRepository;
+}
+    public DemandeFormation createDemandeFormation(Integer collaborateurId, Long formationId) {
+        Formation formation = formationRepository.findById(formationId)
+                .orElseThrow(() -> new InvalidEntityException("Formation non trouvée"));
+        Collaborateur collaborateur = collaborateurRepository.findById(collaborateurId)
+                .orElseThrow(() -> new InvalidEntityException("Collaborateur non trouvé"));
+
+        if (formation != null && collaborateur != null) {
+            if (formation.getQuota_max() > formation.getNbre_places()) {
+                DemandeFormation demandeFormation = new DemandeFormation();
+                demandeFormation.setFormation(formation);
+                demandeFormation.setCollaborateur(collaborateur);
                 demandeFormation.setEtat(EtatDemande.En_cours);
+                demandeFormation.setHeureFormation(new Date());
+
                 return demandeFormationRepository.save(demandeFormation);
             } else {
                 throw new InvalidEntityException("Enregistrement échoué : nombre de places insuffisant");
             }
         } else {
-            throw new InvalidEntityException("Enregistrement échoué : ID de formation non défini");
+            throw new InvalidEntityException("Enregistrement échoué : formation ou collaborateur non trouvé");
         }
     }
+
     @Override
     public DemandeFormation validerDemandeFormation(Long idDemandeFormation) {
 

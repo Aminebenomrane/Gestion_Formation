@@ -17,9 +17,10 @@ public class DemandeFormationController implements DemandeFormationapi {
         this.demandeFormationService = demandeFormationService;
     }
 
+
     @Override
-    public DemandeFormation save(DemandeFormation demandeFormation) {
-        return demandeFormationService.save(demandeFormation);
+    public DemandeFormation createDemandeFormation(Integer collaborateurId, Long formationId) {
+        return this.demandeFormationService.createDemandeFormation(collaborateurId,formationId);
     }
 
     @Override
