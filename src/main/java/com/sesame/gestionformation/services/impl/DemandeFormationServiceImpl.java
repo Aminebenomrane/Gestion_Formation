@@ -45,8 +45,8 @@ public class DemandeFormationServiceImpl implements DemandeFormationService {
             );
             if (formationEnBase != null && (formationEnBase.getQuota_max()) > (formationEnBase.getNbre_places())&&collaborateur1!=null)  {
 
-                demandeFormation.setFormation(formation);
-                demandeFormation.setCollaborateur(collaborateur);
+                demandeFormation.setFormation(formationEnBase);
+                demandeFormation.setCollaborateur(collaborateur1);
                 demandeFormation.setEtat(EtatDemande.En_cours);
                 demandeFormation.setHeureFormation(new Date());
 
@@ -115,5 +115,10 @@ public class DemandeFormationServiceImpl implements DemandeFormationService {
     @Override
     public List<DemandeFormation> findAll() {
         return demandeFormationRepository.findAll();
+    }
+
+    @Override
+    public List<Object[]> findAllValidDemande() {
+        return demandeFormationRepository.findAllDemandeValid();
     }
 }

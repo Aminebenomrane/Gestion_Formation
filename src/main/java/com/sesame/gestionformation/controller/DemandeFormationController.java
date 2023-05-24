@@ -42,4 +42,9 @@ public class DemandeFormationController implements DemandeFormationapi {
     public List<DemandeFormation> findAll() {
         return demandeFormationService.findAll();
     }
+
+    @Override
+    public List<Object[]> findAllValidDemande() {
+        return demandeFormationService.findAllValidDemande();
+    }
 }

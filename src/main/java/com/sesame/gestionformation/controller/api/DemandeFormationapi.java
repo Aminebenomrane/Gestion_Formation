@@ -21,5 +21,7 @@ public interface DemandeFormationapi {
     Optional<DemandeFormation> findById(@PathVariable("idDemandeFormation")Long id);
     @GetMapping(value = Api_Root+"/demandeformation/All")
     List<DemandeFormation> findAll();
+    @GetMapping(value = Api_Root+"/demandeformation/valid")
+    List<Object[]> findAllValidDemande();
 
 }
