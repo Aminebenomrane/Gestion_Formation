@@ -44,7 +44,12 @@ public class DemandeFormationController implements DemandeFormationapi {
     }
 
     @Override
-    public List<Object[]> findAllValidDemande() {
-        return demandeFormationService.findAllValidDemande();
+    public List<Object[]> findAllValidDemande( Integer idCollaborateur) {
+        return demandeFormationService.findAllValidDemande(idCollaborateur);
+    }
+
+    @Override
+    public List<DemandeFormation> findAllEnCours() {
+        return demandeFormationService.findAllEnCours();
     }
 }

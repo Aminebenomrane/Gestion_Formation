@@ -41,27 +41,33 @@ public class DemandeFormationServiceImpl implements DemandeFormationService {
 
         if (formation != null && collaborateur != null) {
             Formation formationEnBase = formationRepository.findById(formation.getIdformation()).orElse(null);
-            Collaborateur collaborateur1=collaborateurRepository.findById(collaborateur.getId_user()).orElse(null
-            );
-            if (formationEnBase != null && (formationEnBase.getQuota_max()) > (formationEnBase.getNbre_places())&&collaborateur1!=null)  {
+            Collaborateur collaborateur1 = collaborateurRepository.findById(collaborateur.getId_user()).orElse(null);
 
-                demandeFormation.setFormation(formationEnBase);
-                demandeFormation.setCollaborateur(collaborateur1);
-                demandeFormation.setEtat(EtatDemande.En_cours);
-                demandeFormation.setHeureFormation(new Date());
+            if (formationEnBase != null && collaborateur1 != null) {
+                // Vérifier si une demande de formation avec le même ID collaborateur et ID formation existe déjà
+                boolean demandeExistante = demandeFormationRepository.existsByFormationAndCollaborateur(formationEnBase, collaborateur1);
 
-                return demandeFormationRepository.save(demandeFormation);
+                if (!demandeExistante && (formationEnBase.getQuota_max() > formationEnBase.getNbre_places())) {
+                    demandeFormation.setFormation(formationEnBase);
+                    demandeFormation.setCollaborateur(collaborateur1);
+                    demandeFormation.setEtat(EtatDemande.En_cours);
+                    demandeFormation.setHeureFormation(new Date());
+
+                    return demandeFormationRepository.save(demandeFormation);
+                } else {
+                    throw new InvalidEntityException("Enregistrement échoué : demande de formation déjà existante ou nombre de places insuffisant");
+                }
             } else {
-                throw new InvalidEntityException("Enregistrement échoué : nombre de places insuffisant");
+                throw new InvalidEntityException("Enregistrement échoué : formation ou collaborateur non trouvé");
             }
         } else {
             throw new InvalidEntityException("Enregistrement échoué : formation ou collaborateur non trouvé");
         }
     }
 
+
     @Override
     public DemandeFormation validerDemandeFormation(Long idDemandeFormation) {
-
 
         // Vérifier que l'ID de la demande de formation n'est pas null
         if (idDemandeFormation == null) {
@@ -77,19 +83,19 @@ public class DemandeFormationServiceImpl implements DemandeFormationService {
         DemandeFormation demandeFormation = demandeFormationOpt.get();
         Formation formation = demandeFormation.getFormation();
 
-        Collaborateur collaborateur = demandeFormation.getCollaborateur();
-        Integer idCollaborateur = collaborateur.getId_user();
-
-        // Rechercher les demandes de formation du même collaborateur à la même heure
-
+        // Vérifier si la demande de formation est à l'état "en cours"
+        if (demandeFormation.getEtat() != EtatDemande.En_cours) {
+            throw new IllegalStateException("La demande de formation n'est pas à l'état 'en cours'");
+        }
 
         // Vérifier si la formation a des places disponibles
         int nbPlaces = formation.getNbre_places();
-        int quota=formation.getQuota_max();
-        if (nbPlaces <=quota ) {
+        int quota = formation.getQuota_max();
+        if (nbPlaces < quota) {
             formation.setNbre_places(nbPlaces + 1);
-
             demandeFormation.setEtat(EtatDemande.Valider);
+        } else {
+            throw new IllegalStateException("La formation a atteint le quota maximum de participants");
         }
 
         // Retourner la demande de formation mise à jour
@@ -118,7 +124,12 @@ public class DemandeFormationServiceImpl implements DemandeFormationService {
     }
 
     @Override
-    public List<Object[]> findAllValidDemande() {
-        return demandeFormationRepository.findAllDemandeValid();
+    public List<Object[]> findAllValidDemande( Integer idCollaborateur) {
+        return demandeFormationRepository.findAllDemandeValidForCollaborateur(idCollaborateur);
+    }
+
+    @Override
+    public List<DemandeFormation> findAllEnCours() {
+        return demandeFormationRepository.findAllByEtat(EtatDemande.En_cours);
     }
 }

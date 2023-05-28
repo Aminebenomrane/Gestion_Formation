@@ -11,7 +11,8 @@ public interface DemandeFormationService {
     DemandeFormation annulerDemandeFormation(Long idDemandeFormation);
     Optional<DemandeFormation> findById(Long id);
     List<DemandeFormation> findAll();
-    List<Object[]> findAllValidDemande();
+    List<Object[]> findAllValidDemande( Integer idCollaborateur);
+    public List<DemandeFormation> findAllEnCours();
 
 
 }
