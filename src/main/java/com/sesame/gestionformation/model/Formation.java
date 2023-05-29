@@ -33,10 +33,10 @@ public class Formation {
     @Temporal(TemporalType.TIME)
     Date heure_formation;
     @JsonIgnore
-    @OneToMany(mappedBy = "formation")
+    @OneToMany(mappedBy = "formation", cascade = CascadeType.ALL)
     List<DemandeFormation>demandeFormations;
     @JsonIgnore
-    @OneToMany(mappedBy = "formation")
+    @OneToMany(mappedBy = "formation", cascade = CascadeType.ALL)
             List<Competence>competences;
     double cout;
     int quota_max;

@@ -1,5 +1,6 @@
 package com.sesame.gestionformation.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,6 +27,7 @@ public class PlanFormation {
     double budget_total;
     double cout;
     @ManyToMany
+
     @JoinColumn(name = "idformation")
     List<Formation> formation;
 
