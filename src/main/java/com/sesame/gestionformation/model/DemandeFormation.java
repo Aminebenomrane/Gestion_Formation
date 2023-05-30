@@ -18,11 +18,11 @@ public class DemandeFormation {
     @Enumerated(EnumType.STRING)
     EtatDemande etat;
 
-    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idformation")
     private Formation formation;
 
-    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idcollaborateur")
     private Collaborateur collaborateur;
     @Column(name = "heure_formation")
