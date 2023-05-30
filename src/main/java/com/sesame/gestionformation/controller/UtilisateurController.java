@@ -6,9 +6,7 @@ import com.sesame.gestionformation.dto.UtilisateurDto;
 import com.sesame.gestionformation.model.Utilisateur;
 import com.sesame.gestionformation.services.UtilisateurService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.webjars.NotFoundException;
 
 import java.util.List;
@@ -51,4 +49,14 @@ utilisateurService.delete(id);
         return Optional.ofNullable(utilisateurRepository.findByEmail(email)
                 .orElseThrow(() -> new NotFoundException("User not found")));
     }
+
+    @PostMapping(value = Api_Root+"/user/email")
+    public Optional<Utilisateur> getUserByEmaileee(@RequestBody String email) {
+        return Optional.ofNullable(utilisateurRepository.findByEmail(email)
+                .orElseThrow(() -> new NotFoundException("User not found")));
+    }
+
+
+
+
 }
