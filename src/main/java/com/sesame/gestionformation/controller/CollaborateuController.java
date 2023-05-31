@@ -19,17 +19,18 @@ public class CollaborateuController implements Collaobrateurapi {
 @Autowired
     CollaborateurService collaborateurService;
     @Override
-    public CollaborateurDto save(CollaborateurDto collaborateurDto) {
-      return   collaborateurService.save(collaborateurDto);
+    public Collaborateur save(Collaborateur collaborateur) {
+      return   collaborateurService.save(collaborateur);
     }
 
     @Override
-    public CollaborateurDto findById(Integer id) {
-        return collaborateurService.findById(id);
+    public Optional<Collaborateur> findById(Integer id) {
+
+        return  collaborateurService.findById(id);
     }
 
     @Override
-    public List<CollaborateurDto> findAll() {
+    public List<Collaborateur> findAll() {
         return collaborateurService.findAll();
     }
 

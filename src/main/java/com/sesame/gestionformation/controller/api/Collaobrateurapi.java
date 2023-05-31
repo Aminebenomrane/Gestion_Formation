@@ -6,16 +6,17 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 import static com.sesame.gestionformation.utils.Constants.Api_Root;
 
 public interface Collaobrateurapi {
     @PostMapping(value = Api_Root + "/collaborateur/create")
-    CollaborateurDto save(@RequestBody CollaborateurDto collaborateurDto);
+    Collaborateur save(@RequestBody Collaborateur collaborateur);
     @GetMapping(value = Api_Root + "/collaborateur/{idcollaborateur}")
-    CollaborateurDto findById(@PathVariable("idcollaborateur") Integer id);
+    Optional<Collaborateur> findById(@PathVariable("idcollaborateur") Integer id);
     @GetMapping(value = Api_Root + "/collaborateur/All")
-    List<CollaborateurDto> findAll();
+    List<Collaborateur> findAll();
     @DeleteMapping(value = Api_Root + "/collaborateur/delete/{idcollaborateur}")
     void delete(@PathVariable("idcollaborateur") Integer id);
     @PostMapping("/competences/{competenceId}/collaborateur/{idcollaborateur}")

@@ -10,9 +10,9 @@ import java.util.List;
 import java.util.Optional;
 
 public interface CollaborateurService {
-    CollaborateurDto save(CollaborateurDto collaborateurDto);
-    CollaborateurDto findById(Integer id);
-    List<CollaborateurDto> findAll();
+    Collaborateur save(Collaborateur collaborateur);
+    Optional<Collaborateur> findById(Integer id);
+    List<Collaborateur> findAll();
     void delete(Integer id);
 
 

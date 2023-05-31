@@ -13,6 +13,7 @@ import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,37 +26,35 @@ import java.util.stream.Collectors;
 @Slf4j
 public class CollaborateurServiceImpl implements CollaborateurService
 {
+    private  final PasswordEncoder passwordEncoder;
     CollaborateurRepository collaborateurRepository;
     @Autowired
     UtilisateurRepository utilisateurRepository;
 @Autowired
-    public CollaborateurServiceImpl(CollaborateurRepository collaborateurRepository) {
-        this.collaborateurRepository = collaborateurRepository;
+    public CollaborateurServiceImpl(PasswordEncoder passwordEncoder, CollaborateurRepository collaborateurRepository) {
+    this.passwordEncoder = passwordEncoder;
+    this.collaborateurRepository = collaborateurRepository;
     }
 
     @Override
-    public CollaborateurDto save(CollaborateurDto collaborateurDto) {
-        List<String>errors= CollaborateurValidator.validate(collaborateurDto);
-        if (!errors.isEmpty()){
-            log.error("Colloaborateur non valide {}",collaborateurDto);
-            throw new InvalidEntityException(ErrorCodes.Collaborateur_Not_Valid,errors);
-        }
-        return CollaborateurDto.fromEntity(collaborateurRepository.save(CollaborateurDto.toEntity(collaborateurDto)));
+    public Collaborateur save(Collaborateur collaborateur) {
+
+        return collaborateurRepository.save(collaborateur);
     }
 
     @Override
-    public CollaborateurDto findById(Integer id) {
+    public Optional<Collaborateur> findById(Integer id) {
         if (id==null){
             log.error("Id de utilisateur est nulle");
         }
 
         Optional<Collaborateur> user=collaborateurRepository.findById(id);
-        return Optional.of(CollaborateurDto.fromEntity(user.get())).orElseThrow(()->new EntityNotFoundException("Aucun Collaborateur avec l'id "+id+"n'est pas trouvé dans la base de donnée", ErrorCodes.Collaborateur_Not_Found));
+        return user;
     }
 
     @Override
-    public List<CollaborateurDto> findAll() {
-        return collaborateurRepository.findAll().stream().map(CollaborateurDto::fromEntity).collect(Collectors.toList());
+    public List<Collaborateur> findAll() {
+        return collaborateurRepository.findAll();
     }
 
     @Override
@@ -83,8 +82,18 @@ public class CollaborateurServiceImpl implements CollaborateurService
     Collaborateur existingCollaborateur = optionalCollaborateur.get();
 
 
+    existingCollaborateur.setEmail(collaborateur.getEmail());
+    existingCollaborateur.setAge(collaborateur.getAge());
+    existingCollaborateur.setNaissance(collaborateur.getNaissance());
+    existingCollaborateur.setNom(collaborateur.getNom());
+    existingCollaborateur.setPassword(passwordEncoder.encode(collaborateur.getPassword()));
+    existingCollaborateur.setTelephone(collaborateur.getTelephone());
+    existingCollaborateur.setPays(collaborateur.getPays());
+    existingCollaborateur.setPrenom(collaborateur.getPrenom());
+    existingCollaborateur.setPseudo(collaborateur.getPseudo());
 
 
+    existingCollaborateur.setDiplome(collaborateur.getDiplome());
     existingCollaborateur.setNiveau(collaborateur.getNiveau());
 
 
