@@ -5,10 +5,12 @@ import com.sesame.gestionformation.dao.UtilisateurRepository;
 import com.sesame.gestionformation.exception.ErrorCodes;
 import com.sesame.gestionformation.exception.InvalidEntityException;
 import com.sesame.gestionformation.model.Responsable;
+import com.sesame.gestionformation.model.Utilisateur;
 import com.sesame.gestionformation.services.ResponsableService;
 import com.sesame.gestionformation.validators.ResponsableValidator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -19,6 +21,7 @@ import java.util.Optional;
 @Service
 @Slf4j
 public class ResponsableServiceImpl implements ResponsableService {
+    @Autowired
     private ResponsableRepository responsableRepository;
     private  final PasswordEncoder passwordEncoder;
     @Autowired
@@ -68,7 +71,13 @@ public class ResponsableServiceImpl implements ResponsableService {
         }
 
         Responsable existingResponsable = optionalResponsable.get();
-
+        Optional<Utilisateur> existingUtilisateurOptional = utilisateurRepository.findByEmail(responsable.getEmail());
+        if (existingUtilisateurOptional.isPresent()) {
+            Utilisateur existingUtilisateur = existingUtilisateurOptional.get();
+            if (!existingUtilisateur.getId_user().equals(existingResponsable.getId_user())) {
+                return ResponseEntity.badRequest().body(null);
+            }
+        }
         existingResponsable.setEmail(responsable.getEmail());
         existingResponsable.setAge(responsable.getAge());
         existingResponsable.setNaissance(responsable.getNaissance());
@@ -78,16 +87,19 @@ public class ResponsableServiceImpl implements ResponsableService {
         existingResponsable.setPays(responsable.getPays());
         existingResponsable.setPrenom(responsable.getPrenom());
         existingResponsable.setPseudo(responsable.getPseudo());
-
-
         existingResponsable.setGrade(responsable.getGrade());
-         existingResponsable.setSpecialite(responsable.getSpecialite());
+        existingResponsable.setSpecialite(responsable.getSpecialite());
 
         Responsable updatedResponsable = responsableRepository.save(existingResponsable);
 
-
-
+        if (updatedResponsable == null) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
         return ResponseEntity.ok(updatedResponsable);
+    }
+
+    public Responsable findByEmail(String email) {
+        return responsableRepository.findByEmail(email);
     }
 
 }

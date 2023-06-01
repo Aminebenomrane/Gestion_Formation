@@ -7,6 +7,7 @@ import com.sesame.gestionformation.dto.CollaborateurDto;
 import com.sesame.gestionformation.exception.EntityNotFoundException;
 import com.sesame.gestionformation.exception.ErrorCodes;
 import com.sesame.gestionformation.exception.InvalidEntityException;
+import com.sesame.gestionformation.model.Utilisateur;
 import com.sesame.gestionformation.services.CollaborateurService;
 import com.sesame.gestionformation.validators.CollaborateurValidator;
 import jakarta.transaction.Transactional;
@@ -81,6 +82,13 @@ public class CollaborateurServiceImpl implements CollaborateurService
 
     Collaborateur existingCollaborateur = optionalCollaborateur.get();
 
+    Optional<Utilisateur> existingUtilisateurOptional = utilisateurRepository.findByEmail(collaborateur.getEmail());
+    if (existingUtilisateurOptional.isPresent()) {
+        Utilisateur existingUtilisateur = existingUtilisateurOptional.get();
+        if (!existingUtilisateur.getId_user().equals(existingCollaborateur.getId_user())) {
+            return ResponseEntity.badRequest().body(null);
+        }
+    }
 
     existingCollaborateur.setEmail(collaborateur.getEmail());
     existingCollaborateur.setAge(collaborateur.getAge());

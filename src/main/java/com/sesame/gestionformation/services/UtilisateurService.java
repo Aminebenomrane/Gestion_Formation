@@ -1,13 +1,14 @@
 package com.sesame.gestionformation.services;
 
 import com.sesame.gestionformation.dto.UtilisateurDto;
-import jakarta.persistence.criteria.CriteriaBuilder;
+import com.sesame.gestionformation.model.Utilisateur;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface UtilisateurService {
-    UtilisateurDto save(UtilisateurDto user);
-    UtilisateurDto findById(Integer id);
-    List<UtilisateurDto> findAll();
+    Utilisateur save(Utilisateur user);
+    Optional<Utilisateur> findById(Integer id);
+    List<Utilisateur> findAll();
     void delete(Integer id);
 }

@@ -15,6 +15,7 @@ public interface ResponsableService {
     Optional<Responsable> findById(Integer id);
     List<Responsable> findAll();
     void delete(Integer id);
-    ResponseEntity<Responsable> updateResponsable(@PathVariable Integer id,
-                                                      @RequestBody Responsable responsable);
+    ResponseEntity<Responsable> updateResponsable(@PathVariable Integer id, @RequestBody Responsable responsable);
+    public Responsable findByEmail(String email);
+
 }

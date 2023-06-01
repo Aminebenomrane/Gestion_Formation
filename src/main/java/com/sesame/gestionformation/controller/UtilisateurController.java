@@ -2,7 +2,6 @@ package com.sesame.gestionformation.controller;
 
 import com.sesame.gestionformation.controller.api.Utilisateurapi;
 import com.sesame.gestionformation.dao.UtilisateurRepository;
-import com.sesame.gestionformation.dto.UtilisateurDto;
 import com.sesame.gestionformation.model.Utilisateur;
 import com.sesame.gestionformation.services.UtilisateurService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,17 +24,17 @@ public class UtilisateurController implements Utilisateurapi {
     }
 
     @Override
-    public UtilisateurDto save(UtilisateurDto user) {
+    public Utilisateur save(Utilisateur user) {
         return utilisateurService.save(user);
     }
 
     @Override
-    public UtilisateurDto findById(Integer id) {
+    public Optional<Utilisateur> findById(Integer id) {
         return utilisateurService.findById(id);
     }
 
     @Override
-    public List<UtilisateurDto> findAll() {
+    public List<Utilisateur> findAll() {
         return utilisateurService.findAll();
     }
 
@@ -50,11 +49,7 @@ utilisateurService.delete(id);
                 .orElseThrow(() -> new NotFoundException("User not found")));
     }
 
-    @PostMapping(value = Api_Root+"/user/email")
-    public Optional<Utilisateur> getUserByEmaileee(@RequestBody String email) {
-        return Optional.ofNullable(utilisateurRepository.findByEmail(email)
-                .orElseThrow(() -> new NotFoundException("User not found")));
-    }
+
 
 
 
