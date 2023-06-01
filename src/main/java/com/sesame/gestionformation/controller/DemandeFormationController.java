@@ -74,7 +74,10 @@ public class DemandeFormationController implements DemandeFormationapi {
     public List<DemandeFormation> findAllAnnuler() {
         return demandeFormationService.findAllAnnuler();
     }
-
+    @Override
+    public List<DemandeFormation> findAllValider() {
+        return demandeFormationService.findAllValider();
+    }
 
 
     @Override
@@ -123,5 +126,9 @@ public class DemandeFormationController implements DemandeFormationapi {
 
         List<DemandeFormation> encoursDemandeFormations = demandeFormationService.getEnCoursDemandeFormationByUser(user);
         return new ResponseEntity<>(encoursDemandeFormations, HttpStatus.OK);
+    }
+    @Override
+    public void delete(Long id) {
+        demandeFormationService.delete(id);
     }
 }

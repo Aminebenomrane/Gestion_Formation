@@ -83,9 +83,9 @@ public class DemandeFormationServiceImpl implements DemandeFormationService {
         DemandeFormation demandeFormation = demandeFormationOpt.get();
         Formation formation = demandeFormation.getFormation();
 
-        // Vérifier si la demande de formation est à l'état "en cours"
+         //Vérifier si la demande de formation est à l'état "en cours"
         if (demandeFormation.getEtat() != EtatDemande.En_cours) {
-            throw new IllegalStateException("La demande de formation n'est pas à l'état 'en cours'");
+          //  throw new IllegalStateException("La demande de formation n'est pas à l'état 'en cours'");
         }
 
         // Vérifier si la formation a des places disponibles
@@ -137,6 +137,11 @@ public class DemandeFormationServiceImpl implements DemandeFormationService {
     public List<DemandeFormation> findAllAnnuler() {
         return demandeFormationRepository.findAllByEtat(EtatDemande.Annuler);
     }
+
+    @Override
+    public List<DemandeFormation> findAllValider() {
+        return demandeFormationRepository.findAllByEtat(EtatDemande.Valider);
+    }
     @Override
     public List<DemandeFormation> getValiderDemandeFormationByUser(Collaborateur user) {
         return demandeFormationRepository.findByEtatAndCollaborateur(EtatDemande.Valider, user);
@@ -157,4 +162,14 @@ public class DemandeFormationServiceImpl implements DemandeFormationService {
     public List<DemandeFormation> getEnCoursDemandeFormationByUser(Collaborateur user) {
         return demandeFormationRepository.findByEtatAndCollaborateur(EtatDemande.En_cours, user);
     }
+
+    @Override
+    public void delete(Long id) {
+
+        if (id == null){
+            log.error("id {} de formation est null ",id);
+        }
+        demandeFormationRepository.deleteById(id);
+    }
+
 }

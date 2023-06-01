@@ -28,6 +28,8 @@ public interface DemandeFormationapi {
      List<DemandeFormation> findAllEnCours();
     @GetMapping(value = Api_Root+"/demandeformation/annuler/All")
     List<DemandeFormation> findAllAnnuler();
+    @GetMapping(value = Api_Root+"/demandeformation/valider/All")
+    List<DemandeFormation> findAllValider();
     @GetMapping(value = Api_Root+"/demandeformation/valider/{userId}")
      ResponseEntity<List<DemandeFormation>> getValiderDemandeFormationByUser(@PathVariable Integer userId);
     @GetMapping(value = Api_Root+"/demandeformation/collaborateur/{id}")
@@ -36,4 +38,6 @@ public interface DemandeFormationapi {
     ResponseEntity<List<DemandeFormation>> getAnnulerDemandeFormationByUser(@PathVariable Integer userId);
     @GetMapping(value = Api_Root+"/demandeformation/encours/{userId}")
     ResponseEntity<List<DemandeFormation>> getEnCoursDemandeFormationByUser(@PathVariable Integer userId);
+    @DeleteMapping(value =Api_Root+ "/demandeformations/delete/{iddemande}")
+    void delete(@PathVariable("iddemande") Long id);
 }
