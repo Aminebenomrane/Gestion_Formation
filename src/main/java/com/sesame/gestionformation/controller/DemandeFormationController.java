@@ -22,10 +22,12 @@ public class DemandeFormationController implements DemandeFormationapi {
 
     CollaborateurRepository cr;
     @Autowired
-    public DemandeFormationController(DemandeFormationService demandeFormationService) {
+    public DemandeFormationController(DemandeFormationService demandeFormationService, CollaborateurRepository cr) {
         this.demandeFormationService = demandeFormationService;
-
+        this.cr = cr;
     }
+
+
 
 
 
