@@ -24,4 +24,6 @@ public interface Collaobrateurapi {
     @PutMapping(value = Api_Root+"/collaborateur/{id}")
     ResponseEntity<Collaborateur> updateCollaborateur(@PathVariable Integer id,
                                                       @RequestBody Collaborateur collaborateur);
+    @GetMapping(value = Api_Root + "/total")
+    int nombreCollaborateur();
 }

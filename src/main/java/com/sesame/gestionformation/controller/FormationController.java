@@ -38,4 +38,9 @@ formationService.delete(id);
     public Formation updateFormation(Long id, Formation formation) {
         return formationService.updateFormation(id,formation);
     }
+
+    @Override
+    public  List<Object[]> findFormationsPlusDemandees() {
+        return formationService.findFormationsPlusDemandees();
+    }
 }

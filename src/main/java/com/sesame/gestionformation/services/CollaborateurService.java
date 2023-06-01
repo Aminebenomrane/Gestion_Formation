@@ -19,4 +19,5 @@ public interface CollaborateurService {
 
     ResponseEntity<Collaborateur> updateCollaborateur(@PathVariable Integer id,
                                                       @RequestBody Collaborateur collaborateur);
+    int nombreCollaborateur();
 }

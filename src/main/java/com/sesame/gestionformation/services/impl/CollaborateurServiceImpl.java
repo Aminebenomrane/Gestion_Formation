@@ -112,6 +112,11 @@ public class CollaborateurServiceImpl implements CollaborateurService
     return ResponseEntity.ok(updatedCollaborateur);
 }
 
+    @Override
+    public int nombreCollaborateur() {
+        return (int) collaborateurRepository.count();
+    }
+
 
 }
 

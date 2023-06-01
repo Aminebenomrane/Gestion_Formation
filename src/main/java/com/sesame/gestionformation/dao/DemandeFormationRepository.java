@@ -21,7 +21,7 @@ public interface DemandeFormationRepository extends JpaRepository<DemandeFormati
     List<Object[]> findAllDemandeValidForCollaborateur(@Param("idCollaborateur") Integer idCollaborateur);
     boolean existsByFormationAndCollaborateur(Formation formation, Collaborateur collaborateur);
     List<DemandeFormation> findAllByEtat(EtatDemande etat);
-
+    long countByEtat(EtatDemande etat);
     List<DemandeFormation> findByEtatAndCollaborateur(EtatDemande etat, Collaborateur collaborateur);
     List<DemandeFormation> findByCollaborateur(Collaborateur collaborateur);
 

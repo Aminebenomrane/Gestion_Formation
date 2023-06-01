@@ -50,6 +50,11 @@ public class CollaborateuController implements Collaobrateurapi {
         return collaborateurService.updateCollaborateur(id,collaborateur);
     }
 
+    @Override
+    public int nombreCollaborateur() {
+        return collaborateurService.nombreCollaborateur();
+    }
+
 
   /*  @Override
     public ResponseEntity<String> ajouterCompetenceACollaborateur(Long comptenceid, Integer idcollaborateur) {

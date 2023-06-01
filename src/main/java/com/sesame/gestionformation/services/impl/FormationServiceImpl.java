@@ -71,5 +71,10 @@ public class FormationServiceImpl implements FormationService {
         return  formationRepository.save(existingFormation);
     }
 
+    @Override
+    public  List<Object[]> findFormationsPlusDemandees() {
+        return formationRepository.findTopFormations();
+    }
+
 
 }

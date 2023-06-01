@@ -19,4 +19,6 @@ public interface Formationapi {
     @PutMapping(value = Api_Root+"/fo/{id}")
    Formation updateFormation(@PathVariable Long id,
                                               @RequestBody Formation formation);
+    @GetMapping(value = Api_Root+"/formations/dem")
+    List<Object[]> findFormationsPlusDemandees();
 }

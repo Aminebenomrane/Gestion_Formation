@@ -61,6 +61,21 @@ public class DemandeFormationController implements DemandeFormationapi {
     }
 
     @Override
+    public long getNombreDemandesValides() {
+        return demandeFormationService.getNombreDemandesValides();
+    }
+
+    @Override
+    public long getNombreDemandesEnCours() {
+        return demandeFormationService.getNombreDemandesEnCours();
+    }
+
+    @Override
+    public long getNombreDemandesAnnulees() {
+        return demandeFormationService.getNombreDemandesAnnulees();
+    }
+
+    @Override
     public List<Object[]> findAllValidDemande( Integer idCollaborateur) {
         return demandeFormationService.findAllValidDemande(idCollaborateur);
     }

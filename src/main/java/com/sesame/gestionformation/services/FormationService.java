@@ -17,5 +17,6 @@ public interface FormationService {
     void delete(Long id);
     Formation updateFormation(@PathVariable Long id,
                                                   @RequestBody Formation formation);
+    List<Object[]> findFormationsPlusDemandees();
 }
 

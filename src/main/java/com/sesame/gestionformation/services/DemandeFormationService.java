@@ -21,4 +21,7 @@ public interface DemandeFormationService {
     public List<DemandeFormation> getAnnulerDemandeFormationByUser(Collaborateur user);
     public List<DemandeFormation> getEnCoursDemandeFormationByUser(Collaborateur user);
     void delete(Long id);
+    long getNombreDemandesValides();
+    long getNombreDemandesEnCours();
+    long getNombreDemandesAnnulees();
 }

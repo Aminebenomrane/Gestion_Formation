@@ -172,4 +172,19 @@ public class DemandeFormationServiceImpl implements DemandeFormationService {
         demandeFormationRepository.deleteById(id);
     }
 
+    @Override
+    public long getNombreDemandesValides() {
+        return demandeFormationRepository.countByEtat(EtatDemande.Valider);
+    }
+
+    @Override
+    public long getNombreDemandesEnCours() {
+        return demandeFormationRepository.countByEtat(EtatDemande.En_cours);
+    }
+
+    @Override
+    public long getNombreDemandesAnnulees() {
+        return demandeFormationRepository.countByEtat(EtatDemande.Annuler);
+    }
+
 }
