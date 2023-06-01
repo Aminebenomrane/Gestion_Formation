@@ -8,11 +8,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ResponsableService {
-    ResponsableDto save(ResponsableDto formateur);
-    ResponsableDto findById(Integer id);
-    List<ResponsableDto> findAll();
+    Responsable save(Responsable formateur);
+    Optional<Responsable> findById(Integer id);
+    List<Responsable> findAll();
     void delete(Integer id);
     ResponseEntity<Responsable> updateResponsable(@PathVariable Integer id,
                                                       @RequestBody Responsable responsable);

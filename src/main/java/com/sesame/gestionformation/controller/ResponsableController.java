@@ -9,6 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Optional;
+
 @RestController
 public class ResponsableController implements Responsableapi {
     @Autowired
@@ -18,17 +20,17 @@ public class ResponsableController implements Responsableapi {
 
     ResponsableService responsableService;
     @Override
-    public ResponsableDto save(ResponsableDto formateur) {
+    public Responsable save(Responsable formateur) {
         return responsableService.save(formateur);
     }
 
     @Override
-    public ResponsableDto findById(Integer id) {
+    public Optional<Responsable> findById(Integer id) {
         return responsableService.findById(id);
     }
 
     @Override
-    public List<ResponsableDto> findAll() {
+    public List<Responsable> findAll() {
         return responsableService.findAll();
     }
 
