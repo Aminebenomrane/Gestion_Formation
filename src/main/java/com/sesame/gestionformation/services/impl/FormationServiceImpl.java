@@ -55,6 +55,7 @@ public class FormationServiceImpl implements FormationService {
         existingFormation.setTitre(formation.getTitre());
         existingFormation.setDescription(formation.getDescription());
         existingFormation.setNiveau(formation.getNiveau());
+        existingFormation.setLien(formation.getLien());
 
         existingFormation.setSpecialite(formation.getSpecialite());
         existingFormation.setDate_formation(formation.getDate_formation());
