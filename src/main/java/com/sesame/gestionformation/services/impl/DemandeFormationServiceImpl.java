@@ -132,8 +132,29 @@ public class DemandeFormationServiceImpl implements DemandeFormationService {
     public List<DemandeFormation> findAllEnCours() {
         return demandeFormationRepository.findAllByEtat(EtatDemande.En_cours);
     }
+
+    @Override
+    public List<DemandeFormation> findAllAnnuler() {
+        return demandeFormationRepository.findAllByEtat(EtatDemande.Annuler);
+    }
     @Override
     public List<DemandeFormation> getValiderDemandeFormationByUser(Collaborateur user) {
         return demandeFormationRepository.findByEtatAndCollaborateur(EtatDemande.Valider, user);
+    }
+
+    @Override
+    public List<DemandeFormation> findDemandeByCollaborateur(Collaborateur collaborateur) {
+        return demandeFormationRepository.findByCollaborateur(collaborateur);
+    }
+
+
+    @Override
+    public List<DemandeFormation> getAnnulerDemandeFormationByUser(Collaborateur user) {
+        return demandeFormationRepository.findByEtatAndCollaborateur(EtatDemande.Annuler, user);
+    }
+
+    @Override
+    public List<DemandeFormation> getEnCoursDemandeFormationByUser(Collaborateur user) {
+        return demandeFormationRepository.findByEtatAndCollaborateur(EtatDemande.En_cours, user);
     }
 }

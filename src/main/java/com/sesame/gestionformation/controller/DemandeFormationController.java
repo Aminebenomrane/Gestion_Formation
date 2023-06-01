@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.Optional;
+
+import static com.sesame.gestionformation.utils.Constants.Api_Root;
+
 @RestController
 public class DemandeFormationController implements DemandeFormationapi {
 
@@ -67,15 +70,58 @@ public class DemandeFormationController implements DemandeFormationapi {
         return demandeFormationService.findAllEnCours();
     }
 
-    @GetMapping("/valider/{userId}")
-    public ResponseEntity<List<DemandeFormation>> getValiderDemandeFormationByUser(@PathVariable Integer userId) {
+    @Override
+    public List<DemandeFormation> findAllAnnuler() {
+        return demandeFormationService.findAllAnnuler();
+    }
+
+
+
+    @Override
+    public ResponseEntity<List<DemandeFormation>> getValiderDemandeFormationByUser(Integer userId) {
         // Here, you would need to retrieve the Collaborateur object based on the provided userId
 
         Collaborateur user = cr.findById(userId).orElse(null);
 
-
-
         List<DemandeFormation> validerDemandeFormations = demandeFormationService.getValiderDemandeFormationByUser(user);
         return new ResponseEntity<>(validerDemandeFormations, HttpStatus.OK);
+    }
+
+
+   @Override
+    public ResponseEntity<List<DemandeFormation>> getDemandeFormationsByCollaborateur(Integer id) {
+        // Retrieve the collaborateur based on the ID (You need to implement this part)
+        Collaborateur collaborateur = cr.findById(id).orElse(null);
+
+        if (collaborateur == null) {
+            // Collaborateur not found, return a 404 response
+            return ResponseEntity.notFound().build();
+        }
+
+        // Retrieve the demandeFormations by collaborateur
+        List<DemandeFormation> demandeFormations = demandeFormationService.findDemandeByCollaborateur(collaborateur);
+
+        return ResponseEntity.ok(demandeFormations);
+    }
+
+
+    @Override
+    public ResponseEntity<List<DemandeFormation>> getAnnulerDemandeFormationByUser(Integer userId) {
+        // Here, you would need to retrieve the Collaborateur object based on the provided userId
+
+        Collaborateur user = cr.findById(userId).orElse(null);
+
+        List<DemandeFormation> annulerDemandeFormations = demandeFormationService.getAnnulerDemandeFormationByUser(user);
+        return new ResponseEntity<>(annulerDemandeFormations, HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<List<DemandeFormation>> getEnCoursDemandeFormationByUser(Integer userId) {
+        // Here, you would need to retrieve the Collaborateur object based on the provided userId
+
+        Collaborateur user = cr.findById(userId).orElse(null);
+
+        List<DemandeFormation> encoursDemandeFormations = demandeFormationService.getEnCoursDemandeFormationByUser(user);
+        return new ResponseEntity<>(encoursDemandeFormations, HttpStatus.OK);
     }
 }

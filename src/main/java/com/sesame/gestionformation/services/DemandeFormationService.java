@@ -14,6 +14,10 @@ public interface DemandeFormationService {
     List<DemandeFormation> findAll();
     List<Object[]> findAllValidDemande( Integer idCollaborateur);
     public List<DemandeFormation> findAllEnCours();
-
+    public List<DemandeFormation> findAllAnnuler();
     public List<DemandeFormation> getValiderDemandeFormationByUser(Collaborateur user);
+    List<DemandeFormation> findDemandeByCollaborateur(Collaborateur collaborateur);
+    public List<DemandeFormation> getAnnulerDemandeFormationByUser(Collaborateur user);
+    public List<DemandeFormation> getEnCoursDemandeFormationByUser(Collaborateur user);
+
 }

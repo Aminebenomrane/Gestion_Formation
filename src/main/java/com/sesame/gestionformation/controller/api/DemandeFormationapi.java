@@ -1,6 +1,7 @@
 package com.sesame.gestionformation.controller.api;
 
 import com.sesame.gestionformation.model.DemandeFormation;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,5 +26,14 @@ public interface DemandeFormationapi {
     List<Object[]> findAllValidDemande(@PathVariable Integer idCollaborateur);
     @GetMapping(value = Api_Root+"/demandeformation/encours/All")
      List<DemandeFormation> findAllEnCours();
-
+    @GetMapping(value = Api_Root+"/demandeformation/annuler/All")
+    List<DemandeFormation> findAllAnnuler();
+    @GetMapping(value = Api_Root+"/demandeformation/valider/{userId}")
+     ResponseEntity<List<DemandeFormation>> getValiderDemandeFormationByUser(@PathVariable Integer userId);
+    @GetMapping(value = Api_Root+"/demandeformation/collaborateur/{id}")
+    public ResponseEntity<List<DemandeFormation>> getDemandeFormationsByCollaborateur(@PathVariable Integer id);
+    @GetMapping(value = Api_Root+"/demandeformation/annuler/{userId}")
+    ResponseEntity<List<DemandeFormation>> getAnnulerDemandeFormationByUser(@PathVariable Integer userId);
+    @GetMapping(value = Api_Root+"/demandeformation/encours/{userId}")
+    ResponseEntity<List<DemandeFormation>> getEnCoursDemandeFormationByUser(@PathVariable Integer userId);
 }
