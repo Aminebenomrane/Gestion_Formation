@@ -1,5 +1,6 @@
 package com.sesame.gestionformation.services;
 
+import com.sesame.gestionformation.model.Collaborateur;
 import com.sesame.gestionformation.model.DemandeFormation;
 
 import java.util.List;
@@ -14,5 +15,5 @@ public interface DemandeFormationService {
     List<Object[]> findAllValidDemande( Integer idCollaborateur);
     public List<DemandeFormation> findAllEnCours();
 
-
+    public List<DemandeFormation> getValiderDemandeFormationByUser(Collaborateur user);
 }

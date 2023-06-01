@@ -35,9 +35,7 @@ public class Formation {
     @JsonIgnore
     @OneToMany(mappedBy = "formation", cascade = CascadeType.ALL)
     List<DemandeFormation>demandeFormations;
-    @JsonIgnore
-    @OneToMany(mappedBy = "formation", cascade = CascadeType.ALL)
-            List<Competence>competences;
+    String lien;
     double cout;
     int quota_max;
     int nbre_places;

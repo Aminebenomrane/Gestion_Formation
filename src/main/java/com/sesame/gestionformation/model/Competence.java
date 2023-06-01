@@ -20,10 +20,7 @@ public class Competence {
     String nom;
     String lien;
     double score;
-    @ManyToOne
 
-    @JoinColumn(name = "idformation")
-    Formation formation;
 
     @JsonIgnore
     @ManyToMany

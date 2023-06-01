@@ -30,7 +30,7 @@ public class CompetenceDto {
                .nom(competence.getNom())
                .lien(competence.getLien())
                .score(competence.getScore())
-               .formation(competence.getFormation())
+
                .collaborateurs(competence.getCollaborateurs())
                .build();
     }
@@ -43,7 +43,6 @@ public class CompetenceDto {
         c.setNom(competenceDto.getNom());
         c.setLien(competenceDto.getLien());
         c.setScore(competenceDto.getScore());
-        c.setFormation(competenceDto.getFormation());
         c.setCollaborateurs(competenceDto.getCollaborateurs());
         return c;
     }
