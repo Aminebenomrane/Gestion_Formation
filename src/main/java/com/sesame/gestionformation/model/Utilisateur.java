@@ -59,6 +59,8 @@ public   class  Utilisateur implements UserDetails {
     @JsonIgnore
 @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
 private List<Token>tokens;
+
+    @JsonIgnore
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority(role.name()));
