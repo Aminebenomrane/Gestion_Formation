@@ -52,10 +52,8 @@ public   class  Utilisateur implements UserDetails {
     private String pseudo;
     @Column(name = "password")
     private String password;
-    private String grade;
-    private String specialite;
-    private String diplome;
-    private String niveau;
+
+
     @Column(name = "role")
     @Enumerated(EnumType.STRING)
     private Role role;

@@ -15,9 +15,10 @@ import java.util.List;
 @Data
 
 @AllArgsConstructor
-
+@NoArgsConstructor
 @SuperBuilder
 public class Responsable extends Utilisateur {
-
+     String grade;
+     String specialite;
 
 }

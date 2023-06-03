@@ -18,7 +18,8 @@ import java.util.List;
 @SuperBuilder
 
 public class Collaborateur extends Utilisateur {
-
+    private String diplome;
+    private String niveau;
 
     @JsonIgnore
     @OneToMany(mappedBy = "collaborateur", cascade = CascadeType.ALL )
