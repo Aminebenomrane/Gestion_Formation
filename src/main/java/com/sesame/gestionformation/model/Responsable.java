@@ -18,8 +18,7 @@ import java.util.List;
 
 @SuperBuilder
 public class Responsable extends Utilisateur {
-    @Column(name = "grade")
-    private String grade;
+
     @Column(name = "specialite")
     private String specialite;
 

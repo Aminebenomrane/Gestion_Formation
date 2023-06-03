@@ -19,4 +19,7 @@ public class RegisterRequest {
     private Role role;
     private int age ;
     private String grade ;
+    private String specialite;
+    private String diplome;
+    private String niveau;
 }

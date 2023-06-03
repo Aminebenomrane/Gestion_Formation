@@ -98,6 +98,7 @@ public class AuthenticationService {
                     .password(passwordEncoder.encode(request.getPassword()))
                     .role(Role.Responsable)
                     .age(request.getAge())
+
                     .build();
 
             var savedUser = repository.save(user);

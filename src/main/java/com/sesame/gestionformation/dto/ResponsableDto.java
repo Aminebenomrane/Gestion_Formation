@@ -20,7 +20,7 @@ public class ResponsableDto {
             return null;
         }
         return ResponsableDto.builder()
-                .grade(responsable.getGrade())
+
                 .specialite(responsable.getSpecialite())
                 .build();}
     public static Responsable toEntity(ResponsableDto responsable){
@@ -29,7 +29,7 @@ public class ResponsableDto {
         }
 
         Responsable f =new Responsable();
-        f.setGrade(responsable.getGrade());
+
         f.setSpecialite(responsable.getSpecialite());
 
         return f;

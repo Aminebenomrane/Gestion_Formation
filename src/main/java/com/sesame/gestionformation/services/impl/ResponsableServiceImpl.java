@@ -87,7 +87,7 @@ public class ResponsableServiceImpl implements ResponsableService {
         existingResponsable.setPays(responsable.getPays());
         existingResponsable.setPrenom(responsable.getPrenom());
         existingResponsable.setPseudo(responsable.getPseudo());
-        existingResponsable.setGrade(responsable.getGrade());
+
         existingResponsable.setSpecialite(responsable.getSpecialite());
 
         Responsable updatedResponsable = responsableRepository.save(existingResponsable);
