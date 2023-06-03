@@ -21,7 +21,7 @@ public class Collaborateur extends Utilisateur {
 
 
     @JsonIgnore
-    @OneToMany(mappedBy = "collaborateur" )
+    @OneToMany(mappedBy = "collaborateur", cascade = CascadeType.ALL )
     List<DemandeFormation>demandeFormations;
 
     @ManyToMany
