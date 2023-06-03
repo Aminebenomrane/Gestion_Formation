@@ -13,13 +13,11 @@ import java.util.List;
 
 @Entity
 @Data
-@NoArgsConstructor
+
 @AllArgsConstructor
 
 @SuperBuilder
 public class Responsable extends Utilisateur {
 
-    @Column(name = "specialite")
-    private String specialite;
 
 }

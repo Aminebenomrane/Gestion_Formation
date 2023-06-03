@@ -80,6 +80,9 @@ public class AuthenticationService {
                     .email(request.getEmail())
                     .password(passwordEncoder.encode(request.getPassword()))
                     .role(Role.Collaborateur)
+                    .niveau(request.getNiveau())
+                    .diplome(request.getDiplome())
+                    .naissance(request.getNaissance())
                     .build();
 
             var savedUser = repository.save(user);
@@ -98,7 +101,8 @@ public class AuthenticationService {
                     .password(passwordEncoder.encode(request.getPassword()))
                     .role(Role.Responsable)
                     .age(request.getAge())
-
+                    .grade(request.getGrade())
+                    .specialite(request.getSpecialite())
                     .build();
 
             var savedUser = repository.save(user);

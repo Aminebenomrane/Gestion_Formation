@@ -19,10 +19,7 @@ import java.util.List;
 
 public class Collaborateur extends Utilisateur {
 
-    @Column(name = "niveau")
-    private String niveau;
-    @Column(name = "diplome")
-    private String diplome;
+
     @JsonIgnore
     @OneToMany(mappedBy = "collaborateur" )
     List<DemandeFormation>demandeFormations;
