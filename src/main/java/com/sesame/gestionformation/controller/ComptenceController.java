@@ -36,4 +36,9 @@ public class ComptenceController implements Comptenceapi {
     public void delete(Long id) {
 comptenceService.delete(id);
     }
+
+    @Override
+    public Competence updateComptence(Long id, Competence competence) {
+        return comptenceService.updateComptence(id,competence);
+    }
 }

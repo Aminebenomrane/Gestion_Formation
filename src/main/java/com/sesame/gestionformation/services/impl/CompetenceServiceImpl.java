@@ -39,6 +39,16 @@ public class CompetenceServiceImpl implements ComptenceService {
     }
 
     @Override
+    public Competence updateComptence(Long id, Competence competence) {
+    Optional<Competence> existingComptence= Optional.ofNullable(competenceRepository.findById(id).orElse(null));
+    Competence competence1= existingComptence.get();
+    competence1.setNom(competence.getNom());
+    competence1.setLien(competence.getLien());
+    competence1.setScore(competence.getScore());
+        return competenceRepository.save(competence1);
+    }
+
+    @Override
     public void delete(Long id) {
     if (id == null){
         log.error("id est null");

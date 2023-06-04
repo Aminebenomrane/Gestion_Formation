@@ -20,6 +20,9 @@ public interface Comptenceapi {
     List<Competence> findAll();
     @DeleteMapping(value = Api_Root + "/competence/delete/{idcompetence}")
     void delete(@PathVariable("idcompetence")Long id);
+    @PutMapping(value = Api_Root+"/competence/update/{id}")
+    Competence updateComptence(@PathVariable Long id,
+                               @RequestBody Competence competence);
 
 
 }
