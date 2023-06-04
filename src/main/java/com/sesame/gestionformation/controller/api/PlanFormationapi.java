@@ -19,5 +19,5 @@ public interface PlanFormationapi {
     @PostMapping(value = Api_Root+"/genererplanbyformation")
     void genererPlanPourChaqueFormation(@RequestBody PlanFormation planFormation);
     @PostMapping(value = Api_Root+"/genererplanglobal")
-    void genererPlanGlobal(@RequestBody String titre);
+    PlanFormation genererPlanGlobal(@RequestBody String titre);
 }

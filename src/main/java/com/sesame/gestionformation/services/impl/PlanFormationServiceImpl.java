@@ -93,13 +93,26 @@ nombreParticipantsTotal+=nombreParticipantsFormation;
             }
 
             double budgetTotal =budget;
-
+            planFormation.setTitre("Plan formation de sesame");
+            planFormation.setDate_debut(new Date());
             planFormation.setNombre_formations(nombreFormations);
             planFormation.setBudget_total(budgetTotal);
             planFormation.setNombre_participants(nombreParticipantsTotal);
             planFormation.setCout(coutTotal);
 
-            // Enregistrer le plan de formation global dans la base de données
+            // Enregistrer le plan de formation global dans la base Hibernate:
+            //    insert
+            //    into
+            //        plan_formation
+            //        (budget_total, cout, date_debut, date_fin, nombre_formations, nombre_participants, titre)
+            //    values
+            //        (?, ?, ?, ?, ?, ?, ?)
+            //Plan de formation global créé avec succès !
+            //Titre du plan : Plan formation de sesame
+            //Nombre de formations : 3
+            //Nombre total de participants : 258
+            //Coût total : 1005.0
+            //Budget total : 101775.0de données
             planFormation = planFormationRepository.save(planFormation);
 
             System.out.println("Plan de formation global créé avec succès !");

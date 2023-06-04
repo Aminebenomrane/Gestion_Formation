@@ -42,7 +42,7 @@ planFormationService.genererPlanPourChaqueFormation(planFormation);
     }
 
     @Override
-    public void genererPlanGlobal(String titre) {
-planFormationService.genererPlanGlobal(titre);
+    public PlanFormation genererPlanGlobal(String titre) {
+return planFormationService.genererPlanGlobal(titre);
     }
 }
