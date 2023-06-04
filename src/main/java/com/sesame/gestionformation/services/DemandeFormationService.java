@@ -24,4 +24,5 @@ public interface DemandeFormationService {
     long getNombreDemandesValides();
     long getNombreDemandesEnCours();
     long getNombreDemandesAnnulees();
+    public List<DemandeFormation> findAllAnnulerEn_Cours();
 }

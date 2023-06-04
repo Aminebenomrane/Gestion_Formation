@@ -46,4 +46,7 @@ public interface DemandeFormationapi {
     ResponseEntity<List<DemandeFormation>> getEnCoursDemandeFormationByUser(@PathVariable Integer userId);
     @DeleteMapping(value =Api_Root+ "/demandeformations/delete/{iddemande}")
     void delete(@PathVariable("iddemande") Long id);
+
+    @GetMapping(value = Api_Root+"/demandeformation/annuler/en_cours")
+    ResponseEntity<List<DemandeFormation>> findAllAnnulerEn_Cours();
 }

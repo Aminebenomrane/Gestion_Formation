@@ -146,4 +146,11 @@ public class DemandeFormationController implements DemandeFormationapi {
     public void delete(Long id) {
         demandeFormationService.delete(id);
     }
+
+    @Override
+    public ResponseEntity<List<DemandeFormation>> findAllAnnulerEn_Cours() {
+        List<DemandeFormation> demandesAnnulees = demandeFormationService.findAllAnnulerEn_Cours();
+        return ResponseEntity.ok(demandesAnnulees);
+    }
+
 }

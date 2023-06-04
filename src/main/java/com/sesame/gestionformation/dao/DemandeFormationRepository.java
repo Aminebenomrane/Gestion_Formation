@@ -24,6 +24,8 @@ public interface DemandeFormationRepository extends JpaRepository<DemandeFormati
     long countByEtat(EtatDemande etat);
     List<DemandeFormation> findByEtatAndCollaborateur(EtatDemande etat, Collaborateur collaborateur);
     List<DemandeFormation> findByCollaborateur(Collaborateur collaborateur);
+    List<DemandeFormation> findAllByEtatIn(List<EtatDemande> etats);
+
 
 
 

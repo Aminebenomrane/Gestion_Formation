@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.webjars.NotFoundException;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -185,6 +186,13 @@ public class DemandeFormationServiceImpl implements DemandeFormationService {
     @Override
     public long getNombreDemandesAnnulees() {
         return demandeFormationRepository.countByEtat(EtatDemande.Annuler);
+    }
+
+
+    @Override
+    public List<DemandeFormation> findAllAnnulerEn_Cours() {
+        List<EtatDemande> etats = Arrays.asList(EtatDemande.Annuler, EtatDemande.Valider);
+        return demandeFormationRepository.findAllByEtatIn(etats);
     }
 
 }
