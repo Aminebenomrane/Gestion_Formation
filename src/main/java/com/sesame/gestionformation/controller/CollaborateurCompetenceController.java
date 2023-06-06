@@ -38,6 +38,33 @@ public class CollaborateurCompetenceController {
         return ResponseEntity.ok().build();
     }
 
+
+
+    @PostMapping(value = Api_Root + "/collaborateurs/{id}/competences/{competenceId}")
+    public ResponseEntity<Void> addCompetenceToCollaborateurr(@PathVariable Integer id, @PathVariable Long competenceId) {
+        Optional<Collaborateur> optionalCollaborateur = collaborateurRepository.findById(id);
+        Optional<Competence> optionalCompetence = competenceRepository.findById(competenceId);
+
+        if (!optionalCollaborateur.isPresent() || !optionalCompetence.isPresent()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        Collaborateur collaborateur = optionalCollaborateur.get();
+        Competence competenceToAdd = optionalCompetence.get();
+
+        if (collaborateur.getCompetences().contains(competenceToAdd)) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        collaborateur.getCompetences().add(competenceToAdd);
+        collaborateurRepository.save(collaborateur);
+
+        return ResponseEntity.ok().build();
+    }
+
+
+
+
     @GetMapping(value=Api_Root +"/collaborateurs/{id}/competences")
     public ResponseEntity<List<Competence>> getCompetencesForCollaborateur(@PathVariable Integer id) {
         Optional<Collaborateur> optionalCollaborateur = collaborateurRepository.findById(id);
